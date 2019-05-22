@@ -1,0 +1,9 @@
+Hi,
+
+{0} kgs of food is available for pickup. Please contact the POC mentioned below:
+
+Name: {1}
+Phone: {2}
+
+Thanks,
+ShareFood
