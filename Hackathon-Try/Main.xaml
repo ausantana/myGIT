@@ -83,22 +83,22 @@
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
-        <ui:InputDialog Options="{x:Null}" DisplayName="Fetch name" sap:VirtualizedContainerService.HintSize="414.4,92.8" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="Please enter your name" Title="Name">
+        <ui:InputDialog Options="{x:Null}" DisplayName="Fetch name" sap:VirtualizedContainerService.HintSize="417.6,92.8" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="Please enter your name" Title="Name">
           <ui:InputDialog.Result>
             <OutArgument x:TypeArguments="ui:GenericValue">[name]</OutArgument>
           </ui:InputDialog.Result>
         </ui:InputDialog>
-        <ui:InputDialog Options="{x:Null}" DisplayName="Get Phone number" sap:VirtualizedContainerService.HintSize="414.4,92.8" sap2010:WorkflowViewState.IdRef="InputDialog_2" IsPassword="False" Label="Enter your Phone number" Title="Phone">
+        <ui:InputDialog Options="{x:Null}" DisplayName="Get Phone number" sap:VirtualizedContainerService.HintSize="417.6,92.8" sap2010:WorkflowViewState.IdRef="InputDialog_2" IsPassword="False" Label="Enter your Phone number" Title="Phone">
           <ui:InputDialog.Result>
             <OutArgument x:TypeArguments="ui:GenericValue">[phoneNum]</OutArgument>
           </ui:InputDialog.Result>
         </ui:InputDialog>
-        <ui:InputDialog Options="{x:Null}" DisplayName="Get food amount" sap:VirtualizedContainerService.HintSize="414.4,92.8" sap2010:WorkflowViewState.IdRef="InputDialog_3" IsPassword="False" Label="Enter the amount of food to be donated (in KGS)" Title="Food amount">
+        <ui:InputDialog Options="{x:Null}" DisplayName="Get food amount" sap:VirtualizedContainerService.HintSize="417.6,92.8" sap2010:WorkflowViewState.IdRef="InputDialog_3" IsPassword="False" Label="Enter the amount of food to be donated (in KGS)" Title="Food amount">
           <ui:InputDialog.Result>
             <OutArgument x:TypeArguments="x:Int32">[food]</OutArgument>
           </ui:InputDialog.Result>
         </ui:InputDialog>
-        <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="414.4,552.8" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+        <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="417.6,324" sap2010:WorkflowViewState.IdRef="TryCatch_2">
           <TryCatch.Try>
             <ui:InputDialog Options="{x:Null}" DisplayName="Fetch location" sap:VirtualizedContainerService.HintSize="314.4,92.8" sap2010:WorkflowViewState.IdRef="InputDialog_4" IsPassword="False" Label="Enter your 6-digit pincode (A number between 600001-600050 for demo purpose)" Title="Pincode">
               <ui:InputDialog.Result>
@@ -107,10 +107,10 @@
             </ui:InputDialog>
           </TryCatch.Try>
           <TryCatch.Catches>
-            <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,388" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+            <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="403.2,22.4" sap2010:WorkflowViewState.IdRef="Catch`1_2">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
@@ -152,13 +152,13 @@
               <av:PointCollection x:Key="ConnectorLocation">300,296.4 300,333.6</av:PointCollection>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Sequence DisplayName="Find nearby NGOs" sap:VirtualizedContainerService.HintSize="486.4,940.8" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <Sequence DisplayName="Find nearby NGOs" sap:VirtualizedContainerService.HintSize="676,831.2" sap2010:WorkflowViewState.IdRef="Sequence_3">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="464,456.8" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" WorkbookPath="NGO test.xlsx">
+            <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="653.6,456.8" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" WorkbookPath="NGO test.xlsx">
               <ui:ExcelApplicationScope.Body>
                 <ActivityAction x:TypeArguments="ui:WorkbookApplication">
                   <ActivityAction.Argument>
@@ -203,10 +203,14 @@
                 </ActivityAction>
               </ui:ExcelApplicationScope.Body>
             </ui:ExcelApplicationScope>
-            <While sap:VirtualizedContainerService.HintSize="464,219.2" sap2010:WorkflowViewState.IdRef="While_1" Condition="[string.IsNullOrEmpty(dataOut)]">
-              <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Display no NGOs" sap:VirtualizedContainerService.HintSize="314.4,60" sap2010:WorkflowViewState.IdRef="MessageBox_11" Text="[&quot;There are no nearby NGO's near you. Please try with another pincode&quot;]" TopMost="True" />
-            </While>
-            <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Display nearby NGOs" sap:VirtualizedContainerService.HintSize="464,60" sap2010:WorkflowViewState.IdRef="MessageBox_12" Text="[&quot;Following are the NGOs available nearby:&quot; + DataOut]" TopMost="True" />
+            <If Condition="[IsNothing(data1)]" sap:VirtualizedContainerService.HintSize="653.6,209.6" sap2010:WorkflowViewState.IdRef="If_1">
+              <If.Then>
+                <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Display no NGOs" sap:VirtualizedContainerService.HintSize="314.4,60" sap2010:WorkflowViewState.IdRef="MessageBox_11" Text="[&quot;There are no nearby NGO's near you. Please try with another pincode&quot;]" TopMost="True" />
+              </If.Then>
+              <If.Else>
+                <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Display nearby NGOs" sap:VirtualizedContainerService.HintSize="314.4,60" sap2010:WorkflowViewState.IdRef="MessageBox_12" Text="[&quot;Following are the NGOs available nearby:&quot; + DataOut]" TopMost="True" />
+              </If.Else>
+            </If>
           </Sequence>
           <FlowStep.Next>
             <FlowStep x:Name="__ReferenceID1">
