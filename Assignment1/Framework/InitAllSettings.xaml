@@ -1,12 +1,12 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="InitiAllSettings" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:maes="clr-namespace:Microsoft.Activities.Extensions.Statements;assembly=Microsoft.Activities.Extensions" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_DataPath" Type="InArgument(x:String)" />
-    <x:Property Name="out_Config" Type="OutArgument(scg:IDictionary(x:String, x:Object))" />
+    <x:Property Name="out_Config" Type="OutArgument(scg:Dictionary(x:String, x:Object))" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>440.8,857.6</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>493.6,841.6</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GetAllSettings_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="23">
@@ -36,7 +36,7 @@
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="20">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="40">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -57,6 +57,8 @@
       <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities</AssemblyReference>
       <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="Init All settings" sap:VirtualizedContainerService.HintSize="453.6,761.6" sap2010:WorkflowViewState.IdRef="Sequence_2">
@@ -68,13 +70,13 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:ReadRange AddHeaders="True" DataTable="[ExcelDataTable]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="431.2,88" sap2010:WorkflowViewState.IdRef="ReadRange_1" Range="A1:B3" SheetName="Sheet1" WorkbookPath="[in_DataPath]" />
+    <ui:ReadRange AddHeaders="True" DataTable="[ExcelDataTable]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="431.2,88" sap2010:WorkflowViewState.IdRef="ReadRange_1" Range="A1:B4" SheetName="Settings" WorkbookPath="[in_DataPath]" />
     <Assign sap:VirtualizedContainerService.HintSize="431.2,60" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
-        <OutArgument x:TypeArguments="scg:IDictionary(x:String, x:Object)">[out_Config]</OutArgument>
+        <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)">[out_Config]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="scg:IDictionary(x:String, x:Object)" xml:space="preserve">[new Dictionary(of  String, Object)]</InArgument>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" xml:space="preserve">[new Dictionary(of  String, Object)]</InArgument>
       </Assign.Value>
     </Assign>
     <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[ExcelDataTable]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="431.2,408.8" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
@@ -92,7 +94,7 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <maes:AddToDictionary x:TypeArguments="x:Object, x:Object" Dictionary="[out_Config]" DisplayName="Add to dictionary" sap:VirtualizedContainerService.HintSize="378.4,135.2" sap2010:WorkflowViewState.IdRef="AddToDictionary`2_2" />
+            <maes:AddToDictionary x:TypeArguments="x:String, x:Object" Dictionary="[out_Config]" DisplayName="Add to dictionary" sap:VirtualizedContainerService.HintSize="378.4,135.2" sap2010:WorkflowViewState.IdRef="AddToDictionary`2_1" Key="[row(&quot;Name&quot;).ToString]" Value="[row(&quot;Value&quot;)]" />
           </Sequence>
         </ActivityAction>
       </ui:ForEachRow.Body>
