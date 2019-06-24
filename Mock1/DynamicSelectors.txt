@@ -1,0 +1,5 @@
+<webctrl aaname='"+in_TransactionNumber.toString+"' tag='li' />
+
+<webctrl aaname='"+in_TransactionItem.toString+"' tag='li' />
+
+ExtractDataTable.Select("Type='WI2' and Status='Open' and Date>'2018-01-01'")
