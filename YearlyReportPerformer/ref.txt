@@ -1,0 +1,15 @@
+
+
+<wnd app='iexplore.exe' cls='#32770' />
+<wnd aaname='Internet Explorer' cls='DirectUIHWND' />
+<wnd aaname='Save as' cls='Button' title='Save &amp;as' />
+
+
+Path.Combine(Environment.CurrentDirectory, in_ReportsDownloadPath, "Yearly-Report-"+in_Year+"-"+in_TaxID+".xlsx")
+
+IT754893
+"C:\Users\Santana\Documents\UiPath\YearlyReportPerformer\Data\MonthlyReports"
+
+UploadConfirmation.Substring("Report was uploaded - confirmation id is ".Length)
+
+
